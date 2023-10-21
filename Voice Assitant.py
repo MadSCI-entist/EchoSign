@@ -1,0 +1,111 @@
+
+import speech_recognition as sr
+#To listen to our input voice
+import pyttsx3
+#For JJ to speak back
+# use the default microphone as the audio source
+import pywhatkit
+# Powerful package to open and play youtube website etc..
+import datetime
+#For Time Showing package
+import wikipedia
+#for searching in wikipedia
+import pyjokes
+#For telling Jokes
+import os
+
+listener = sr.Recognizer()
+# listen for the first phrase and extract it into audio data
+#Python will reconize  your voice
+engine = pyttsx3.init()
+engine.say('Welcome Sir, Nice to meet you again..')
+engine.say('How may I help you: ')
+print ('Listening.....')
+engine.runAndWait()
+
+
+
+def talk(text):
+    engine.say(text)
+    engine.runAndWait()
+# Create the define (talk) to say to talk the text that we say to the JJ Voice Asst.
+#For JJ to speack to you created an engine to intialize the engine mentioned above.
+
+def talk(text):
+    engine.say(text)
+    engine.runAndWait()
+
+def take_command():
+    try:
+        with sr.Microphone() as source:
+            print('listening...')
+            voice = listener.listen(source)
+            global command
+            coma = listener.recognize_google(voice)
+            command = coma.lower()
+            if 'JJ' in command:
+                command = command.replace('JJ', '')
+                print(command)
+    except:
+        pass
+    return command
+# recognize speech using Google Speech Recognition
+            # speech is unintelligible
+            # The voice asst. npip install pywhatkitame: JJ. WIthout mention it. JJ will not respond.       
+
+def run_JJ():
+    comm = take_command()
+    print(comm)
+    if 'play' in comm:
+        song = comm.replace('play', '')
+        talk('Coming Shortly Sir....' + song)
+        pywhatkit.playonyt(song)
+    elif 'hello' in comm:
+        reply = command.replace('hello', '')
+        talk('Welcome Sir, Nice to meet you again..')
+        print ('Welcome Sir, Nice to meet you again..')
+        talk('Welcome Back!!!')
+        print ('Welcome Back!!!')
+        talk('Update of the system: Our system is are absolutely fine.')
+        print ('Update: Our system is are absolutely fine.')
+        talk('We have blocked 7 trackers and 2 virus preventing it from damaging our system lately.')
+        print ('We have blocked 7 trackers and 2 virus preventing it from damaging our system lately.')
+        talk('JJ Sir: We are absolutely Ready to go...')
+        print ('JJ Sir: We are absolutely Ready to go...')
+        talk('How may I help you: ')
+        print ('Listening.....')
+    elif 'time' in comm:
+        time = datetime.datetime.now().strftime('%I:%M %p')
+        talk('Current time is ' + time)
+    elif "where is" in comm:
+        location = location.split(" ")
+        location = location[2]
+        talk("Hold on Sir, I will show you where " + location + " is.")
+        os.system("chromium-browser https://www.google.nl/maps/place/" + location + "/&amp;")
+    elif 'how are you' in comm:
+        talk('I am fine, Thankyou Sir')
+        print('I am finne, Thankyou Sir')
+    elif 'question' in comm:
+        person = comm.replace('question', '')
+        info = wikipedia.summary(person, 1)
+        print(info)
+        talk(info)
+    elif 'date' in comm:
+        talk('sorry, I am afraid that I cant. Sorry!!!')
+        print('sorry, I am afraid that I cant. Sorry!!!')
+    elif 'are you lonely' in comm:
+        talk('I am a friend of the wifi')
+        print('I am a friend of the wifi')
+    elif 'joke' in comm:
+        talk(pyjokes.get_joke()) 
+    elif 'bye' in comm:
+        talk('Bye, Thankyou for using me')
+        print('Bye, Thankyou for using me.')
+        talk('It has been my plesure in meeting you again. See you next time around')
+        print('It has been my plesure in meeting you again. See you next time around.')
+    else:
+        talk('Please say the command again.')
+
+
+while True:
+    run_JJ()
