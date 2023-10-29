@@ -1,4 +1,5 @@
-from PIL import Image, ImageTk
+from PIL import Image
+from PIL import ImageTk
 import tkinter as tk
 from tkinter import ttk
 import json
@@ -132,21 +133,6 @@ def volume_set():
 def lambda_func():
 	volume_position_save()
 	volume_set()
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
 
 # Header
 title_label = tk.Label(master = window, text = 'SignoGlove', font = ('SegoeUI 24 bold italic',20,'italic','bold'))
