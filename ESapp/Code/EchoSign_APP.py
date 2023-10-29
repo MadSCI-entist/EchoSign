@@ -1,5 +1,4 @@
-from PIL import Image
-from PIL import ImageTk
+from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk
 import json
