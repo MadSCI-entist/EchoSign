@@ -107,33 +107,23 @@ def volume_set():
 
 def sign_convert():
 	while True:
-    # Read data from Arduino 1
-    	data1 = arduino1_serial.readline().decode().strip()
-    # Read data from Arduino 2
-    	data2 = arduino2_serial.readline().decode().strip()
+		
+		try:
+			data1 = arduino1_serial.readline().decode().strip()
+			data2 = arduino2_serial.readline().decode().strip()
+			sensor_data1 = data1.split(",")
+			sensor_data2 = data2.split(",")
 
-    # Process data from Arduino 1
-    	sensor_data1 = data1.split(",")
-    
-    # Process data from Arduino 2
-    	sensor_data2 = data2.split(",")
-    
-    # Print or process the sensor data from both Arduino
-    	try:
-    		print("Arduino 1 Sensor Data:", sensor_data1)
-    		print("Arduino 2 Sensor Data:", sensor_data2)
-    	except:
-    		print('Recieved less than 8 values')
+			print("Arduino 1 Sensor Data:", sensor_data1)
+			print("Arduino 2 Sensor Data:", sensor_data2)
+			X1, Y1, Z1 , F1, F2, F3, F4, F5 = sensor_data1
+			X2, Y2, Z2 , F6, F7, F8, F9, F10 = sensor_data2
+			time.sleep(0.5)
+			if keyboard.is_pressed("}"):
+				Break
 
-    	X1, Y1, Z1 , F1, F2, F3, F4, F5 = sensor_data1
-    	X2, Y2, Z2 , F6, F7, F8, F9, F10 = sensor_data2
-
-    	time.sleep(0.5)
-	
-    	if keyboard.is_pressed("}"):
-    		Break
-        	
-
+		except:
+			print('Error')
 
 
 def lambda_func():
@@ -149,6 +139,7 @@ title_label.pack(side = 'top', anchor = 'n')
 #input_frame = tk.Frame(master = window)
 #input_frame.configure(bg = 'blue')
 Bck = tk.Button(window,text = 'Back', command = Back )
+Start = tk.Button(window,text = 'Back', command = sign_convert )
 Back_2 = tk.Button(window,text = 'Back', command = Bck_2 )
 Say = tk.Button(window,text = 'Say', command = TTS_convert )
 
@@ -173,4 +164,3 @@ Engine = pyttsx3.init()
 
 #run
 window.mainloop()
-
